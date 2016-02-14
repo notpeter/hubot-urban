@@ -21,16 +21,12 @@
 #   Benjamin Eidelman (@beneidel)
 
 module.exports = (robot) ->
-
   robot.respond /what ?is ([^\?]*)[\?]*/i, (msg) ->
     urbanDict msg, msg.match[1], (found, entry, sounds) ->
       if !found
         msg.send "I don't know what \"#{msg.match[1]}\" is"
         return
       msg.send "#{entry.definition}"
-      if sounds and sounds.length
-        msg.send "#{sounds.join(' ')}"
-
 
   robot.respond /(urban)( define)?( example)?( me)? (.*)/i, (msg) ->
     urbanDict msg, msg.match[5], (found, entry, sounds) ->
